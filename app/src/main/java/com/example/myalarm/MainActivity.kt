@@ -13,6 +13,11 @@ import android.util.Log
 import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.Year
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +39,36 @@ class MainActivity : AppCompatActivity() {
             cancelAlarm(1234)
         }
 
+
+//        val date = Date()
+//        // creating clockInfo instance
+//        val clockInfo = AlarmManager.AlarmClockInfo(date.time+5000, alarmPendingIntent)
+//        // setting the alarm
+//        alarmManager.setAlarmClock(clockInfo, alarmPendingIntent)
+
+        val dateString = "2023-10-09 15:30:00"
+        val formatPattern = "yyyy-MM-dd HH:mm:ss"
+
+        val dateTime = stringToDateUsingDateTimeFormatter(dateString, formatPattern)
+
+        if (dateTime != null) {
+            println("Parsed Date and Time: $dateTime")
+        } else {
+            println("Failed to parse the date and time.")
+        }
+
     }
+
+    fun stringToDateUsingDateTimeFormatter(dateString: String, formatPattern: String): LocalDateTime? {
+        val formatter = DateTimeFormatter.ofPattern(formatPattern)
+        try {
+            return LocalDateTime.parse(dateString, formatter)
+        } catch (e: DateTimeParseException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
 
     private val REQUEST_PERMISSION = 1000000
     private fun checkAndGetNotificationPermission() {

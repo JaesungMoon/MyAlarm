@@ -40,7 +40,7 @@ class MyBroadcastReceiver: BroadcastReceiver() {
         val notificationBuilder = NotificationCompat.Builder(context, localNotiChannelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
-            .setContentText(messageBody)
+//            .setContentText(messageBody)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
